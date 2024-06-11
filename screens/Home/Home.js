@@ -6,6 +6,7 @@ import globalStyle from '../../assets/styles/globalStyle';
 import style from './style';
 import Button from '../../components/Button/Button';
 import Tab from '../../components/Tab/Tab';
+import Badge from '../../components/Badge/Badge';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Header title='Jim Du' type={1} />
       <Tab title='HightLight' />
       <Tab title='HightLight' isInactive={true} />
+      <Badge title='Envionment' />
     </SafeAreaView>
   );
 };
