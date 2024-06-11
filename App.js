@@ -1,12 +1,11 @@
-import { View, Text, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { GestureDetector } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
 
-import getFontFamily from './assets/fonts/helper';
-import { scaleFontSize } from './assets/styles/scaling';
+import MainNavigation from './navigation/MainNavigation';
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
@@ -32,25 +31,10 @@ export default function App() {
   }
   return (
     <>
-      <View style={styles.container} onLayout={onLayoutRootView}>
-        <Text style={styles.text}>
-          Open up App.js to start working on your app!
-        </Text>
-      </View>
       <StatusBar style='auto' />
+      <NavigationContainer onReady={onLayoutRootView}>
+        <MainNavigation />
+      </NavigationContainer>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontFamily: getFontFamily('Inter', '500'),
-    fontSize: scaleFontSize(16),
-  },
-});
