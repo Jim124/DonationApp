@@ -3,6 +3,10 @@ import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { GestureDetector } from 'react-native-gesture-handler';
+
+import getFontFamily from './assets/fonts/helper';
+import { scaleFontSize } from './assets/styles/scaling';
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
@@ -29,7 +33,9 @@ export default function App() {
   return (
     <>
       <View style={styles.container} onLayout={onLayoutRootView}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <Text style={styles.text}>
+          Open up App.js to start working on your app!
+        </Text>
       </View>
       <StatusBar style='auto' />
     </>
@@ -42,5 +48,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    fontFamily: getFontFamily('Inter', '500'),
+    fontSize: scaleFontSize(16),
   },
 });
