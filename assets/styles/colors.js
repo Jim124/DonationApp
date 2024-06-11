@@ -8,6 +8,8 @@ const Colors = {
   searchBarBackgroundColor: '#F3F5F9',
   searchTextInputColor: '#686C7A',
   searchIconColor: '#25C0FF',
+  donationItemTitleColor: '#0A043C',
+  donationItemPriceColor: '#156CF7',
 };
 
 export default Colors;
