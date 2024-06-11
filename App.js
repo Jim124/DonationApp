@@ -4,8 +4,10 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { GestureDetector } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
 
 import MainNavigation from './navigation/MainNavigation';
+import store from './redux/store';
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
@@ -32,9 +34,11 @@ export default function App() {
   return (
     <>
       <StatusBar style='auto' />
-      <NavigationContainer onReady={onLayoutRootView}>
-        <MainNavigation />
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer onReady={onLayoutRootView}>
+          <MainNavigation />
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }
