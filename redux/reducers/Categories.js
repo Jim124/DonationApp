@@ -13,11 +13,12 @@ const Categories = createSlice({
     resetToCategoryState: () => {
       return initialState;
     },
-    updateCategoryId: (state, action) => {
+    updateSelectedCategoryId: (state, action) => {
       state.selectedCategoryId = action.payload;
     },
   },
 });
 
-export const { resetToCategoryState, updateCategoryId } = Categories.actions;
+export const { resetToCategoryState, updateSelectedCategoryId } =
+  Categories.actions;
 export default Categories.reducer;

@@ -13,7 +13,6 @@ const Tab = (props) => {
   };
   return (
     <Pressable
-      isDisabled={props.isInactive}
       onPress={props.onPress}
       style={[style.tab, props.isInactive && style.inactiveTab, tabWidth]}
     >
@@ -34,10 +33,12 @@ Tab.default = {
   title: '',
   isInactive: false,
   onPress: () => {},
+  tabId: 0,
 };
 Tab.propTypes = {
   title: PropTypes.string.isRequired,
   isInactive: PropTypes.bool,
   onPress: PropTypes.func,
+  tabId: PropTypes.number.isRequired,
 };
 export default Tab;

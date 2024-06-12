@@ -5,6 +5,7 @@ import {
   Text,
   View,
   Image,
+  FlatList,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,16 +23,19 @@ import {
   updateFirstName,
   resetToInitialState,
 } from '../../redux/reducers/User';
-import { resetToCategoryState } from '../../redux/reducers/Categories';
+import { updateSelectedCategoryId } from '../../redux/reducers/Categories';
 
 const Home = () => {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
+  const dispatch = useDispatch();
   const handleSearch = (search) => {
     console.log('search:' + search);
   };
 
+  function handleSelectedCategoryId(categoryId) {
+    dispatch(updateSelectedCategoryId(categoryId));
+  }
   return (
     <SafeAreaView style={[globalStyle.backgroundColor, globalStyle.flex]}>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -59,6 +63,27 @@ const Home = () => {
             style={style.highlightedImage}
           />
         </Pressable>
+        <View style={style.categoryHeader}>
+          <Header title='select category' type={2} />
+        </View>
+        <View style={style.categories}>
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            data={categories.categories}
+            keyExtractor={(item) => item.categoryId}
+            renderItem={({ item }) => (
+              <View style={style.categoryItem}>
+                <Tab
+                  tabId={item.categoryId}
+                  title={item.name}
+                  isInactive={item.categoryId !== categories.selectedCategoryId}
+                  onPress={handleSelectedCategoryId.bind(this, item.categoryId)}
+                />
+              </View>
+            )}
+          />
+        </View>
       </ScrollView>
 
       {/*  */}
