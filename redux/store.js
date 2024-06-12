@@ -4,9 +4,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
 import User from './reducers/User';
+import Categories from './reducers/Categories';
 
 const rootReducer = combineReducers({
   user: User,
+  categories: Categories,
 });
 
 //configuration redux-persist

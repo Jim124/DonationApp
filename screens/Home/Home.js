@@ -1,4 +1,11 @@
-import { Pressable, SafeAreaView, Text } from 'react-native';
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+  Image,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Header from '../../components/Header/Header';
@@ -11,47 +18,50 @@ import Badge from '../../components/Badge/Badge';
 import Search from '../../components/Search/Search';
 import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
 import { horizontalScale } from '../../assets/styles/scaling';
-import { updateFirstName } from '../../redux/reducers/User';
+import {
+  updateFirstName,
+  resetToInitialState,
+} from '../../redux/reducers/User';
+import { resetToCategoryState } from '../../redux/reducers/Categories';
 
 const Home = () => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories);
   const handleSearch = (search) => {
     console.log('search:' + search);
   };
-  const dispatch = useDispatch();
+
   return (
     <SafeAreaView style={[globalStyle.backgroundColor, globalStyle.flex]}>
-      <Header title={user.firstName + user.lastName} type={1} />
-      <Pressable
-        onPress={() => dispatch(updateFirstName({ firstName: 'Pingan' }))}
-      >
-        <Text>Press me to update name</Text>
-      </Pressable>
-      {/* <Header title='Jim Du' type={1} />
-      <Tab title='HightLight' />
-      <Tab title='HightLight' isInactive={true} />
-      <Badge title='Envionment' /> */}
-      {/* <Search onSearch={handleSearch} /> */}
-      {/* <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: horizontalScale(12),
-        }}
-      >
-        <SingleDonationItem
-          price={44}
-          badgeTitle='Environment'
-          donationTitle='Tree Cactus'
-          uri='https://img.pixers.pics/pho_wat(s3:700/FO/44/24/64/31/700_FO44246431_ab024cd8251bff09ce9ae6ecd05ec4a8.jpg,525,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,305,650,jpg)/stickers-cactus-cartoon-illustration.jpg.jpg'
-        />
-        <SingleDonationItem
-          price={44}
-          badgeTitle='Environment'
-          donationTitle='Tree Cactus'
-          uri='https://img.pixers.pics/pho_wat(s3:700/FO/44/24/64/31/700_FO44246431_ab024cd8251bff09ce9ae6ecd05ec4a8.jpg,525,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,305,650,jpg)/stickers-cactus-cartoon-illustration.jpg.jpg'
-        />
-      </View> */}
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        <View style={style.header}>
+          <View style={style.headerInfoContainer}>
+            <Text style={style.headerIntroText}>Hello,</Text>
+            <View style={style.username}>
+              <Header title={user.firstName + user.lastName + ' 👏'} type={1} />
+            </View>
+          </View>
+          <Image
+            source={{ uri: user.profileUri }}
+            resizeMode='contain'
+            style={style.profileImage}
+          />
+        </View>
+        <View style={style.searchBox}>
+          <Search placeholder={'Search'} />
+        </View>
+
+        <Pressable style={style.highlightedImageContainer}>
+          <Image
+            source={require('../../assets/images/highlighted_image.png')}
+            resizeMode='contain'
+            style={style.highlightedImage}
+          />
+        </Pressable>
+      </ScrollView>
+
+      {/*  */}
     </SafeAreaView>
   );
 };

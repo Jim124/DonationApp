@@ -12,7 +12,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: horizontalScale(16),
-    marginHorizontal: horizontalScale(24),
+
     height: verticalScale(50),
     backgroundColor: Colors.searchBarBackgroundColor,
     borderRadius: horizontalScale(15),

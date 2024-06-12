@@ -10,6 +10,7 @@ const Colors = {
   searchIconColor: '#25C0FF',
   donationItemTitleColor: '#0A043C',
   donationItemPriceColor: '#156CF7',
+  homeHeaderIntroTextColor: '#636776',
 };
 
 export default Colors;
