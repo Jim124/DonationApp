@@ -5,9 +5,11 @@ import { StatusBar } from 'expo-status-bar';
 import { GestureDetector } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import MainNavigation from './navigation/MainNavigation';
 import store from './redux/store';
+import { persistor } from './redux/store';
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
@@ -35,9 +37,11 @@ export default function App() {
     <>
       <StatusBar style='auto' />
       <Provider store={store}>
-        <NavigationContainer onReady={onLayoutRootView}>
-          <MainNavigation />
-        </NavigationContainer>
+        <PersistGate persistor={persistor} loading={null}>
+          <NavigationContainer onReady={onLayoutRootView}>
+            <MainNavigation />
+          </NavigationContainer>
+        </PersistGate>
       </Provider>
     </>
   );
