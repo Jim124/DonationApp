@@ -8,6 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 
 import Header from '../../components/Header/Header';
 
@@ -24,11 +25,41 @@ import {
   resetToInitialState,
 } from '../../redux/reducers/User';
 import { updateSelectedCategoryId } from '../../redux/reducers/Categories';
+import pagination from '../../util/pages';
 
 const Home = () => {
   const user = useSelector((state) => state.user);
   const categories = useSelector((state) => state.categories);
+  const donations = useSelector((state) => state.donations);
+  const [categoryPageNumber, setCategoryPageNumber] = useState(1);
+  const [categoriesList, setCategoriesList] = useState([]);
+  const [donationItems, setDonationItems] = useState([]);
+  console.log(donationItems);
+  const [isLoadingCategory, setIsLoadingCategory] = useState(false);
+  const categoryPageSize = 4;
   const dispatch = useDispatch();
+
+  //set donationItems
+  useEffect(() => {
+    const donationItems = donations.items.filter((item) =>
+      item.categoryIds.includes(categories.selectedCategoryId)
+    );
+    setDonationItems(donationItems);
+  }, [categories.selectedCategoryId, setDonationItems, donations]);
+
+  // set category
+  useEffect(() => {
+    setIsLoadingCategory(true);
+    const initCategories = pagination(
+      categories.categories,
+      categoryPageNumber,
+      categoryPageSize
+    );
+    setCategoriesList(initCategories);
+    setCategoryPageNumber((currentNum) => currentNum + 1);
+    setIsLoadingCategory(false);
+  }, []);
+
   const handleSearch = (search) => {
     console.log('search:' + search);
   };
@@ -53,7 +84,7 @@ const Home = () => {
           />
         </View>
         <View style={style.searchBox}>
-          <Search placeholder={'Search'} />
+          <Search placeholder={'Search'} onSearch={handleSearch} />
         </View>
 
         <Pressable style={style.highlightedImageContainer}>
@@ -70,7 +101,27 @@ const Home = () => {
           <FlatList
             horizontal={true}
             showsHorizontalScrollIndicator={false}
-            data={categories.categories}
+            onEndReachedThreshold={0.5}
+            onEndReached={() => {
+              if (isLoadingCategory) {
+                return;
+              }
+              setIsLoadingCategory(true);
+              const categoriesData = pagination(
+                categories.categories,
+                categoryPageNumber,
+                categoryPageSize
+              );
+              if (categoriesData.length > 0) {
+                setCategoriesList((currentList) => [
+                  ...currentList,
+                  ...categoriesData,
+                ]);
+                setCategoryPageNumber((currentNum) => currentNum + 1);
+                setIsLoadingCategory(false);
+              }
+            }}
+            data={categoriesList}
             keyExtractor={(item) => item.categoryId}
             renderItem={({ item }) => (
               <View style={style.categoryItem}>
