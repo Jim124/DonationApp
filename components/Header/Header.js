@@ -23,6 +23,7 @@ const Header = (props) => {
           styleToApply(props.type),
           props.color && { color: props.color },
         ]}
+        numberOfLines={props.numberOfLines ? props.numberOfLines : null}
       >
         {props.title}
       </Text>
@@ -34,12 +35,14 @@ Header.default = {
   title: '',
   type: 1,
   color: '#000000',
+  numberOfLines: null,
 };
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.number.isRequired,
   color: PropTypes.string,
+  numberOfLines: PropTypes.number,
 };
 
 export default Header;

@@ -14,27 +14,21 @@ import Header from '../../components/Header/Header';
 
 import globalStyle from '../../assets/styles/globalStyle';
 import style from './style';
-import Button from '../../components/Button/Button';
 import Tab from '../../components/Tab/Tab';
-import Badge from '../../components/Badge/Badge';
 import Search from '../../components/Search/Search';
 import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
-import { horizontalScale } from '../../assets/styles/scaling';
-import {
-  updateFirstName,
-  resetToInitialState,
-} from '../../redux/reducers/User';
 import { updateSelectedCategoryId } from '../../redux/reducers/Categories';
+import { updateSelectedDonationId } from '../../redux/reducers/Donations';
 import pagination from '../../util/pages';
+import { Routes } from '../../navigation/Routes';
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   const categories = useSelector((state) => state.categories);
   const donations = useSelector((state) => state.donations);
   const [categoryPageNumber, setCategoryPageNumber] = useState(1);
   const [categoriesList, setCategoriesList] = useState([]);
   const [donationItems, setDonationItems] = useState([]);
-  console.log(donationItems);
   const [isLoadingCategory, setIsLoadingCategory] = useState(false);
   const categoryPageSize = 4;
   const dispatch = useDispatch();
@@ -66,6 +60,11 @@ const Home = () => {
 
   function handleSelectedCategoryId(categoryId) {
     dispatch(updateSelectedCategoryId(categoryId));
+  }
+
+  function handleSelectedDonationId(donationItemId) {
+    dispatch(updateSelectedDonationId(donationItemId));
+    navigation.navigate(Routes.SingleDonationItem);
   }
   return (
     <SafeAreaView style={[globalStyle.backgroundColor, globalStyle.flex]}>
@@ -134,6 +133,28 @@ const Home = () => {
               </View>
             )}
           />
+        </View>
+        <View style={style.donationsContainer}>
+          {donationItems.length > 0 &&
+            donationItems.map((donation) => (
+              <View key={donation.donationItemId} style={style.donationItem}>
+                <SingleDonationItem
+                  uri={donation.image}
+                  donationTitle={donation.name}
+                  price={parseFloat(donation.price)}
+                  badgeTitle={
+                    categories.categories.filter(
+                      (category) =>
+                        category.categoryId === categories.selectedCategoryId
+                    )[0].name
+                  }
+                  onPress={handleSelectedDonationId.bind(
+                    this,
+                    donation.donationItemId
+                  )}
+                />
+              </View>
+            ))}
         </View>
       </ScrollView>
 

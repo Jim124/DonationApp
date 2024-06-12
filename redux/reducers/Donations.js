@@ -5,6 +5,7 @@ import items from '../../assets/data/items';
 const initialState = {
   items: items,
   selectedDonationId: null,
+  selectedDonationInformation: {},
 };
 
 const Donations = createSlice({
@@ -16,9 +17,12 @@ const Donations = createSlice({
     },
     updateSelectedDonationId: (state, action) => {
       state.selectedDonationId = action.payload;
+      state.selectedDonationInformation = state.items.find(
+        (item) => item.donationItemId === action.payload
+      );
     },
   },
 });
 
-export const { resetItems, updateSelectedItemId } = Donations.actions;
+export const { resetItems, updateSelectedDonationId } = Donations.actions;
 export default Donations.reducer;
