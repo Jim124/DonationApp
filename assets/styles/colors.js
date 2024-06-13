@@ -12,6 +12,7 @@ const Colors = {
   donationItemPriceColor: '#156CF7',
   homeHeaderIntroTextColor: '#636776',
   backbuttonBackgroundColor: '#FAFAFA',
+  inputComponentColor: '#36455A',
 };
 
 export default Colors;
