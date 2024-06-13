@@ -64,7 +64,12 @@ const Home = ({ navigation }) => {
 
   function handleSelectedDonationId(donationItemId) {
     dispatch(updateSelectedDonationId(donationItemId));
-    navigation.navigate(Routes.SingleDonationItem);
+    const categoryInformation = categories.categories.find(
+      (category) => category.categoryId === categories.selectedCategoryId
+    );
+    navigation.navigate(Routes.SingleDonationItem, {
+      categoryInformation: categoryInformation,
+    });
   }
   return (
     <SafeAreaView style={[globalStyle.backgroundColor, globalStyle.flex]}>
@@ -136,25 +141,27 @@ const Home = ({ navigation }) => {
         </View>
         <View style={style.donationsContainer}>
           {donationItems.length > 0 &&
-            donationItems.map((donation) => (
-              <View key={donation.donationItemId} style={style.donationItem}>
-                <SingleDonationItem
-                  uri={donation.image}
-                  donationTitle={donation.name}
-                  price={parseFloat(donation.price)}
-                  badgeTitle={
-                    categories.categories.filter(
-                      (category) =>
-                        category.categoryId === categories.selectedCategoryId
-                    )[0].name
-                  }
-                  onPress={handleSelectedDonationId.bind(
-                    this,
-                    donation.donationItemId
-                  )}
-                />
-              </View>
-            ))}
+            donationItems.map((donation) => {
+              const category = categories.categories.find(
+                (category) =>
+                  category.categoryId === categories.selectedCategoryId
+              );
+
+              return (
+                <View key={donation.donationItemId} style={style.donationItem}>
+                  <SingleDonationItem
+                    uri={donation.image}
+                    donationTitle={donation.name}
+                    price={parseFloat(donation.price)}
+                    badgeTitle={category.name}
+                    onPress={handleSelectedDonationId.bind(
+                      this,
+                      donation.donationItemId
+                    )}
+                  />
+                </View>
+              );
+            })}
         </View>
       </ScrollView>
 
