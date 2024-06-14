@@ -26,8 +26,7 @@ const Registration = ({ navigation }) => {
   function handlePassword(value) {
     setPassword(value);
   }
-  const handleRegister = async (fullName, email, password) => {
-    console.log(fullName);
+  const handleRegister = async () => {
     if (fullName.length <= 2 || email.length <= 5 || password.length < 6) {
       setError('Please enter valid value');
       return;
