@@ -40,7 +40,7 @@ const Registration = ({ navigation }) => {
     } else {
       setError('');
       setSuccess('You have successfully registered');
-      setTimeout(() => navigation.goBack(), 3000);
+      setTimeout(() => navigation.goBack(), 2000);
     }
   };
   return (
@@ -79,7 +79,7 @@ const Registration = ({ navigation }) => {
         {success.length > 0 && <Text style={style.success}>{success}</Text>}
         <View style={globalStyle.marginBotton24}>
           <Button
-            isDisabled={error.length > 0}
+            isDisabled={error.length > 0 || success.length > 0}
             title='Register'
             onPress={handleRegister}
           />
