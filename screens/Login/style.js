@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { horizontalScale } from '../../assets/styles/scaling';
 
+import {
+  horizontalScale,
+  scaleFontSize,
+  verticalScale,
+} from '../../assets/styles/scaling';
+import getFontFamily from '../../assets/fonts/helper';
+import Colors from '../../assets/styles/colors';
 const style = StyleSheet.create({
   container: {
     marginHorizontal: horizontalScale(24),
@@ -9,6 +15,18 @@ const style = StyleSheet.create({
   },
   registerLink: {
     alignItems: 'center',
+  },
+  error: {
+    fontFamily: getFontFamily('Inter', '400'),
+    fontSize: scaleFontSize(16),
+    color: Colors.errorMsgColor,
+    marginBottom: verticalScale(24),
+  },
+  success: {
+    fontFamily: getFontFamily('Inter', '400'),
+    fontSize: scaleFontSize(16),
+    color: Colors.successMsgColor,
+    marginBottom: verticalScale(24),
   },
 });
 

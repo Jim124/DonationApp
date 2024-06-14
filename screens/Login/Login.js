@@ -1,4 +1,4 @@
-import { Pressable, SafeAreaView, ScrollView, View } from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, View, Text } from 'react-native';
 import { useState } from 'react';
 
 import Input from '../../components/Input/Input';
@@ -8,16 +8,31 @@ import style from './style';
 import globalStyle from '../../assets/styles/globalStyle';
 import Colors from '../../assets/styles/colors';
 import { Routes } from '../../navigation/Routes';
+import { loginUser } from '../../api/use';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   function handleEmail(value) {
     setEmail(value);
   }
   function handlePassword(value) {
     setPassword(value);
   }
+  const handleLogin = async () => {
+    if (email.length < 5 || password.length < 8) {
+      setError('Please enter valid email or password');
+      return;
+    }
+    const response = await loginUser(email, password);
+    if (!response.status) {
+      setError(response.error);
+    } else {
+      setError('');
+      navigation.navigate(Routes.Home);
+    }
+  };
   return (
     <SafeAreaView style={[globalStyle.backgroundColor, globalStyle.flex]}>
       <ScrollView contentContainerStyle={style.container}>
@@ -40,12 +55,12 @@ const Login = ({ navigation }) => {
             secureTextEntry={true}
           />
         </View>
+        {error.length > 0 && <Text style={style.error}>{error}</Text>}
         <View style={globalStyle.marginBotton24}>
           <Button
+            isDisabled={email.length < 5 || password.length < 8}
             title='Login'
-            onPress={() => {
-              console.log('login...');
-            }}
+            onPress={handleLogin}
           />
         </View>
         <Pressable
