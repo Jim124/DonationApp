@@ -18,19 +18,16 @@ const Registration = ({ navigation }) => {
 
   function handleFullName(value) {
     setFullName(value);
-    setError('');
   }
 
   function handleEmail(value) {
     setEmail(value);
-    setError('');
   }
   function handlePassword(value) {
     setPassword(value);
-    setError('');
   }
   const handleRegister = async () => {
-    if (fullName.length <= 2 || email.length <= 5 || password.length < 6) {
+    if (fullName.length <= 2 || email.length <= 5 || password.length < 8) {
       setError('Please enter valid value');
       return;
     }
@@ -79,7 +76,9 @@ const Registration = ({ navigation }) => {
         {success.length > 0 && <Text style={style.success}>{success}</Text>}
         <View style={globalStyle.marginBotton24}>
           <Button
-            isDisabled={error.length > 0 || success.length > 0}
+            isDisabled={
+              fullName.length <= 2 || email.length <= 5 || password.length < 8
+            }
             title='Register'
             onPress={handleRegister}
           />
