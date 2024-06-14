@@ -18,13 +18,16 @@ const Registration = ({ navigation }) => {
 
   function handleFullName(value) {
     setFullName(value);
+    setError('');
   }
 
   function handleEmail(value) {
     setEmail(value);
+    setError('');
   }
   function handlePassword(value) {
     setPassword(value);
+    setError('');
   }
   const handleRegister = async () => {
     if (fullName.length <= 2 || email.length <= 5 || password.length < 6) {
