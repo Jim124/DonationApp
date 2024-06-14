@@ -4,6 +4,7 @@ import Home from '../screens/Home/Home';
 import { Routes } from './Routes';
 import SingleDonationItem from '../screens/SingleDonationScreen/SingleDonationItem';
 import Login from '../screens/Login/Login';
+import Registration from '../screens/Registration/Registration';
 
 const Stack = createNativeStackNavigator();
 const MainNavigation = () => {
@@ -16,6 +17,7 @@ const MainNavigation = () => {
       }}
     >
       <Stack.Screen name={Routes.Login} component={Login} />
+      <Stack.Screen name={Routes.Registration} component={Registration} />
       <Stack.Screen name={Routes.Home} component={Home} />
       <Stack.Screen
         name={Routes.SingleDonationItem}
