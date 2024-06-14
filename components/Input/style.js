@@ -8,7 +8,7 @@ const style = StyleSheet.create({
     fontFamily: getFontFamily('Inter', '400'),
     fontWeight: '400',
     fontSize: scaleFontSize(12),
-    lineHeight: scaleFontSize(15),
+    lineHeight: scaleFontSize(13),
     color: Colors.inputComponentColor,
   },
   input: {

@@ -14,6 +14,8 @@ const Colors = {
   backbuttonBackgroundColor: '#FAFAFA',
   inputComponentColor: '#36455A',
   registerLinkColor: '#156CF7',
+  errorMsgColor: '#FF0000',
+  successMsgColor: '#28a745',
 };
 
 export default Colors;
