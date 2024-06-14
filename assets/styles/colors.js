@@ -13,6 +13,7 @@ const Colors = {
   homeHeaderIntroTextColor: '#636776',
   backbuttonBackgroundColor: '#FAFAFA',
   inputComponentColor: '#36455A',
+  registerLinkColor: '#156CF7',
 };
 
 export default Colors;

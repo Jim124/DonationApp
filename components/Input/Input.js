@@ -26,7 +26,7 @@ const Input = (props) => {
   );
 };
 
-Input.defaultProps = {
+Input.default = {
   label: '',
   keyboardType: 'default',
   secureTextEntry: false,
