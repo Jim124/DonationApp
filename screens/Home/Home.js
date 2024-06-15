@@ -6,6 +6,7 @@ import {
   View,
   Image,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
@@ -19,8 +20,11 @@ import Search from '../../components/Search/Search';
 import SingleDonationItem from '../../components/SingleDonationItem/SingleDonationItem';
 import { updateSelectedCategoryId } from '../../redux/reducers/Categories';
 import { updateSelectedDonationId } from '../../redux/reducers/Donations';
+import { resetToInitialState } from '../../redux/reducers/User';
 import pagination from '../../util/pages';
 import { Routes } from '../../navigation/Routes';
+import Colors from '../../assets/styles/colors';
+import { logout } from '../../api/use';
 
 const Home = ({ navigation }) => {
   const user = useSelector((state) => state.user);
@@ -81,11 +85,21 @@ const Home = ({ navigation }) => {
               <Header title={user.displayName + ' 👏'} type={1} />
             </View>
           </View>
-          <Image
-            source={{ uri: user.profileUri }}
-            resizeMode='contain'
-            style={style.profileImage}
-          />
+          <View>
+            <Image
+              source={{ uri: user.profileUri }}
+              resizeMode='contain'
+              style={style.profileImage}
+            />
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(resetToInitialState());
+                logout();
+              }}
+            >
+              <Header title='logout' color={Colors.logoutColor} type={3} />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={style.searchBox}>
           <Search placeholder={'Search'} onSearch={handleSearch} />

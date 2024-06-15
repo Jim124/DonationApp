@@ -16,6 +16,7 @@ const Colors = {
   registerLinkColor: '#156CF7',
   errorMsgColor: '#FF0000',
   successMsgColor: '#28a745',
+  logoutColor: '#156CF7',
 };
 
 export default Colors;

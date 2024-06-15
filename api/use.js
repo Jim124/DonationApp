@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from 'firebase/auth';
 
@@ -55,4 +56,8 @@ export const loginUser = async (email, password) => {
     }
     return { status: false, error: 'somthing went wrong' };
   }
+};
+export const logout = async () => {
+  const auth = getAuth(app);
+  await signOut(auth);
 };
