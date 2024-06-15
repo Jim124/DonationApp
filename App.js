@@ -7,9 +7,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import MainNavigation from './navigation/MainNavigation';
 import store from './redux/store';
 import { persistor } from './redux/store';
+import RootNavigation from './navigation/RootNavigation';
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
@@ -39,7 +39,7 @@ export default function App() {
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <NavigationContainer onReady={onLayoutRootView}>
-            <MainNavigation />
+            <RootNavigation />
           </NavigationContainer>
         </PersistGate>
       </Provider>
