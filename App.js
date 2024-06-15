@@ -1,5 +1,6 @@
+import { useCallback, useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
-import { useCallback } from 'react';
+import { AppState } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { GestureDetector } from 'react-native-gesture-handler';
@@ -10,9 +11,28 @@ import { PersistGate } from 'redux-persist/integration/react';
 import store from './redux/store';
 import { persistor } from './redux/store';
 import RootNavigation from './navigation/RootNavigation';
+import { checkToken } from './api/use';
 
 SplashScreen.preventAutoHideAsync();
 export default function App() {
+  const appState = useRef(AppState.currentState);
+  useEffect(() => {
+    const subscripton = AppState.addEventListener(
+      'change',
+      async (nextAppState) => {
+        if (
+          appState.current.match(/inactive|background/) &&
+          nextAppState === 'active'
+        ) {
+          console.log('You have come back into the app.');
+          await checkToken();
+        }
+        appState.current = nextAppState;
+      }
+    );
+    checkToken();
+    console.log('Application has rendered');
+  }, []);
   const [fontsLoaded, fontError] = useFonts({
     'inter-Black': require('./assets/fonts/Inter-Black.ttf'),
     'inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
@@ -33,6 +53,7 @@ export default function App() {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+
   return (
     <>
       <StatusBar style='auto' />

@@ -5,8 +5,10 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-
+import store from '../redux/store';
 import app from '../config/firebaseConfig';
+
+import { updateToken } from '../redux/reducers/User';
 
 export const createUser = async (fullName, email, password) => {
   try {
@@ -57,7 +59,20 @@ export const loginUser = async (email, password) => {
     return { status: false, error: 'somthing went wrong' };
   }
 };
+
 export const logout = async () => {
   const auth = getAuth(app);
   await signOut(auth);
+};
+
+export const checkToken = async () => {
+  const auth = getAuth(app);
+  try {
+    const response = await auth.currentUser.getIdToken(true);
+    console.log('we are updating token for us...');
+    store.dispatch(updateToken(response));
+    return response;
+  } catch (error) {
+    return error;
+  }
 };
