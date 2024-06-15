@@ -9,11 +9,14 @@ import globalStyle from '../../assets/styles/globalStyle';
 import Colors from '../../assets/styles/colors';
 import { Routes } from '../../navigation/Routes';
 import { loginUser } from '../../api/use';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../redux/reducers/User';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const dispatch = useDispatch();
   function handleEmail(value) {
     setEmail(value);
   }
@@ -29,6 +32,7 @@ const Login = ({ navigation }) => {
     if (!response.status) {
       setError(response.error);
     } else {
+      dispatch(logIn(response.data));
       setError('');
       navigation.navigate(Routes.Home);
     }

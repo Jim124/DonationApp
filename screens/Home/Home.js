@@ -78,7 +78,7 @@ const Home = ({ navigation }) => {
           <View style={style.headerInfoContainer}>
             <Text style={style.headerIntroText}>Hello,</Text>
             <View style={style.username}>
-              <Header title={user.firstName + user.lastName + ' 👏'} type={1} />
+              <Header title={user.displayName + ' 👏'} type={1} />
             </View>
           </View>
           <Image
