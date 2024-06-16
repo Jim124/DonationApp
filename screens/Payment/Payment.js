@@ -25,7 +25,6 @@ const Payment = ({ navigation }) => {
       user.email,
       donationItem.price
     );
-    console.log(clientSecret);
     const { error, paymentIntent } = await confirmPayment(clientSecret, {
       paymentMethodType: 'Card',
     });
@@ -36,7 +35,9 @@ const Payment = ({ navigation }) => {
       );
     } else if (paymentIntent) {
       Alert.alert('Successful', 'The payment was confirmed successfully!');
-      navigation.goBack();
+      setTimeout(() => {
+        navigation.goBack();
+      }, 2000);
     }
   }
   return (
@@ -45,7 +46,7 @@ const Payment = ({ navigation }) => {
         <View>
           <Header title='Making Donation' type={3} />
           <Text style={style.price}>
-            You are abount to donate {donationItem.price}
+            You are abount to donate ${donationItem.price}
           </Text>
         </View>
         <View>
