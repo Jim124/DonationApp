@@ -1,6 +1,8 @@
 import { Image, SafeAreaView, ScrollView, View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 
+import { Routes } from '../../navigation/Routes';
+
 import BackButton from '../../components/BackButton/BackButton';
 import globalStyle from '../../assets/styles/globalStyle';
 import style from './style';
@@ -30,7 +32,10 @@ const SingleDonationItem = ({ navigation, route }) => {
         </View>
       </ScrollView>
       <View style={style.button}>
-        <Button title={'Donation'} />
+        <Button
+          title={'Donation'}
+          onPress={() => navigation.navigate(Routes.Payment)}
+        />
       </View>
     </SafeAreaView>
   );

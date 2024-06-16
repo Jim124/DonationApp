@@ -5,6 +5,7 @@ import { Routes } from './Routes';
 import SingleDonationItem from '../screens/SingleDonationScreen/SingleDonationItem';
 import Login from '../screens/Login/Login';
 import Registration from '../screens/Registration/Registration';
+import Payment from '../screens/Payment/Payment';
 
 const Stack = createNativeStackNavigator();
 export const NonAuthenticated = () => {
@@ -36,6 +37,7 @@ export const Authenticated = () => {
         name={Routes.SingleDonationItem}
         component={SingleDonationItem}
       />
+      <Stack.Screen name={Routes.Payment} component={Payment} />
     </Stack.Navigator>
   );
 };
