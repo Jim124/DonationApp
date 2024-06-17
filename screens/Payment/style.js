@@ -6,6 +6,9 @@ const style = StyleSheet.create({
     marginHorizontal: horizontalScale(24),
     marginTop: verticalScale(7),
   },
+  headerContainer: {
+    marginTop: verticalScale(25),
+  },
   price: {
     marginTop: verticalScale(12),
   },
@@ -15,6 +18,10 @@ const style = StyleSheet.create({
   cardForm: {
     height: verticalScale(200),
     marginTop: verticalScale(12),
+  },
+  cardFormAndroid: {
+    height: verticalScale(250),
+    marginTop: verticalScale(22),
   },
 });
 

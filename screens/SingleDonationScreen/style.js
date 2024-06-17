@@ -12,6 +12,9 @@ const style = StyleSheet.create({
     marginHorizontal: horizontalScale(20),
     marginTop: verticalScale(7),
   },
+  backContainer: {
+    marginTop: verticalScale(25),
+  },
   image: {
     marginTop: verticalScale(12),
     marginBottom: verticalScale(24),

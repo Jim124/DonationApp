@@ -3,7 +3,6 @@ import { useFonts } from 'expo-font';
 import { AppState } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { GestureDetector } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -34,14 +33,14 @@ export default function App() {
     console.log('Application has rendered');
   }, []);
   const [fontsLoaded, fontError] = useFonts({
-    'inter-Black': require('./assets/fonts/Inter-Black.ttf'),
-    'inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
-    'inter-ExtraBold': require('./assets/fonts/Inter-ExtraBold.ttf'),
-    'inter-ExtraLight': require('./assets/fonts/Inter-ExtraLight.ttf'),
-    'inter-Medium': require('./assets/fonts/Inter-Medium.ttf'),
-    'inter-Regular': require('./assets/fonts/Inter-Regular.ttf'),
-    'inter-SemiBold': require('./assets/fonts/Inter-SemiBold.ttf'),
-    'inter-Thin': require('./assets/fonts/Inter-Thin.ttf'),
+    'Inter-Black': require('./assets/fonts/Inter-Black.ttf'),
+    'Inter-Bold': require('./assets/fonts/Inter-Bold.ttf'),
+    'Inter-ExtraBold': require('./assets/fonts/Inter-ExtraBold.ttf'),
+    'Inter-ExtraLight': require('./assets/fonts/Inter-ExtraLight.ttf'),
+    'Inter-Medium': require('./assets/fonts/Inter-Medium.ttf'),
+    'Inter-Regular': require('./assets/fonts/Inter-Regular.ttf'),
+    'Inter-SemiBold': require('./assets/fonts/Inter-SemiBold.ttf'),
+    'Inter-Thin': require('./assets/fonts/Inter-Thin.ttf'),
   });
 
   const onLayoutRootView = useCallback(async () => {

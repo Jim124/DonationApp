@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { SafeAreaView, ScrollView, View, Text, Alert } from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  Alert,
+  Platform,
+} from 'react-native';
 import {
   StripeProvider,
   CardForm,
@@ -44,7 +51,9 @@ const Payment = ({ navigation }) => {
     <SafeAreaView style={[globalStyle.backgroundColor, globalStyle.flex]}>
       <ScrollView style={style.paymentContainer}>
         <View>
-          <Header title='Making Donation' type={3} />
+          <View style={Platform.OS === 'android' && style.headerContainer}>
+            <Header title='Making Donation' type={3} />
+          </View>
           <Text style={style.price}>
             You are abount to donate ${donationItem.price}
           </Text>
@@ -52,7 +61,11 @@ const Payment = ({ navigation }) => {
         <View>
           <StripeProvider publishableKey={Constants.STRIPE_PUBLIC_KEY}>
             <CardForm
-              style={style.cardForm}
+              style={
+                Platform.OS === 'android'
+                  ? style.cardFormAndroid
+                  : style.cardForm
+              }
               onFormComplete={() => {
                 setIsReady(true);
               }}
