@@ -4,7 +4,7 @@
     "slug": "DonationApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/cat-house.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -12,21 +12,27 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "buildNumber":"1.0.0",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
-      "versionCode":1,
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hongfeidu.CatHouse"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "28d52d34-a60f-4fb1-8fca-40f0c20b97ff"
+      }
+    }
   }
 }
