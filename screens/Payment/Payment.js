@@ -7,6 +7,7 @@ import {
   Text,
   Alert,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import {
   StripeProvider,
@@ -20,6 +21,7 @@ import Header from '../../components/Header/Header';
 import Button from '../../components/Button/Button';
 import Constants from '../../constants/App';
 import { fetchPaymentIntentClientSecret } from '../../api/stripePayment';
+import Colors from '../../assets/styles/colors';
 const Payment = ({ navigation }) => {
   const [isReady, setIsReady] = useState(false);
   const donationItem = useSelector(
@@ -28,6 +30,7 @@ const Payment = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   const { confirmPayment, loading } = useConfirmPayment();
   async function handlePayment() {
+    setIsReady(true);
     const clientSecret = await fetchPaymentIntentClientSecret(
       user.email,
       donationItem.price
@@ -40,11 +43,11 @@ const Payment = ({ navigation }) => {
         'Error has occured with your payment',
         error.localizedMessage
       );
+      return;
     } else if (paymentIntent) {
-      Alert.alert('Successful', 'The payment was confirmed successfully!');
-      setTimeout(() => {
-        navigation.goBack();
-      }, 1500);
+      Alert.alert('Successful', 'The payment was confirmed successfully!', [
+        { text: 'OK', onPress: () => navigation.goBack() },
+      ]);
     }
   }
   return (
@@ -67,18 +70,27 @@ const Payment = ({ navigation }) => {
                   : style.cardForm
               }
               onFormComplete={() => {
-                setIsReady(true);
+                setIsReady(false);
               }}
             />
           </StripeProvider>
         </View>
       </ScrollView>
       <View style={style.button}>
-        <Button
+        {isReady ? (
+          <ActivityIndicator size={'large'} color={Colors.logoutColor} />
+        ) : (
+          <Button
+            title='Donate'
+            // isDisabled={!isReady || loading}
+            onPress={handlePayment}
+          />
+        )}
+        {/* <Button
           title='Donate'
           isDisabled={!isReady || loading}
           onPress={handlePayment}
-        />
+        /> */}
       </View>
     </SafeAreaView>
   );
