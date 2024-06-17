@@ -18,7 +18,7 @@ export const User = createSlice({
     },
     updateToken: (state, action) => {
       state.token = action.payload;
-      state.isLogined = true;
+      //return { ...state, ...{ isLogined: true }, token: action.payload };
     },
   },
 });
