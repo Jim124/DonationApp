@@ -34,6 +34,7 @@ const Home = ({ navigation }) => {
   const [categoriesList, setCategoriesList] = useState([]);
   const [donationItems, setDonationItems] = useState([]);
   const [isLoadingCategory, setIsLoadingCategory] = useState(false);
+  const [searchWord, setSearchWord] = useState('');
   const categoryPageSize = 4;
   const dispatch = useDispatch();
 
@@ -58,8 +59,16 @@ const Home = ({ navigation }) => {
     setIsLoadingCategory(false);
   }, []);
 
+  // set search
+  useEffect(() => {
+    const currentDonations = donations.items.filter((item) =>
+      item.name.includes(searchWord)
+    );
+    setDonationItems(currentDonations);
+  }, [searchWord]);
+
   const handleSearch = (search) => {
-    console.log('search:' + search);
+    setSearchWord(search);
   };
 
   function handleSelectedCategoryId(categoryId) {
