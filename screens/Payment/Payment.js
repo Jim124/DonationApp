@@ -39,6 +39,7 @@ const Payment = ({ navigation }) => {
       paymentMethodType: 'Card',
     });
     if (error) {
+      setIsReady(false);
       Alert.alert(
         'Error has occured with your payment',
         error.localizedMessage
