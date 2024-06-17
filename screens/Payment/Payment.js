@@ -44,7 +44,7 @@ const Payment = ({ navigation }) => {
       Alert.alert('Successful', 'The payment was confirmed successfully!');
       setTimeout(() => {
         navigation.goBack();
-      }, 2000);
+      }, 1500);
     }
   }
   return (

@@ -1,4 +1,11 @@
-import { Pressable, SafeAreaView, ScrollView, View, Text } from 'react-native';
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import { useState } from 'react';
 
 import Input from '../../components/Input/Input';
@@ -16,6 +23,7 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   function handleEmail(value) {
     setEmail(value);
@@ -28,6 +36,7 @@ const Login = ({ navigation }) => {
       setError('Please enter valid email or password');
       return;
     }
+    setIsLoading(true);
     const response = await loginUser(email, password);
     if (!response.status) {
       setError(response.error);
@@ -36,6 +45,7 @@ const Login = ({ navigation }) => {
       setError('');
       navigation.navigate(Routes.Home);
     }
+    setIsLoading(false);
   };
   return (
     <SafeAreaView style={[globalStyle.backgroundColor, globalStyle.flex]}>
@@ -61,11 +71,15 @@ const Login = ({ navigation }) => {
         </View>
         {error.length > 0 && <Text style={style.error}>{error}</Text>}
         <View style={globalStyle.marginBotton24}>
-          <Button
-            isDisabled={email.length < 5 || password.length < 8}
-            title='Login'
-            onPress={handleLogin}
-          />
+          {isLoading ? (
+            <ActivityIndicator color={Colors.logoutColor} />
+          ) : (
+            <Button
+              isDisabled={email.length < 5 || password.length < 8}
+              title='Login'
+              onPress={handleLogin}
+            />
+          )}
         </View>
         <Pressable
           style={style.registerLink}
