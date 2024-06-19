@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useFonts } from 'expo-font';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+import * as Device from 'expo-device';
 
 import store from './redux/store';
 import { persistor } from './redux/store';
@@ -23,14 +26,17 @@ export default function App() {
           appState.current.match(/inactive|background/) &&
           nextAppState === 'active'
         ) {
-          console.log('You have come back into the app.');
           await checkToken();
         }
         appState.current = nextAppState;
       }
     );
     checkToken();
-    console.log('Application has rendered');
+  }, []);
+
+  // get access to get token
+  useEffect(() => {
+    subscribeToNotification();
   }, []);
   const [fontsLoaded, fontError] = useFonts({
     'Inter-Black': require('./assets/fonts/Inter-Black.ttf'),
@@ -53,6 +59,33 @@ export default function App() {
     return null;
   }
 
+  async function subscribeToNotification() {
+    let token = '';
+    if (Platform.OS === 'android') {
+      await Notifications.setNotificationChannelAsync('default', {
+        name: 'default',
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: '#FF231F7C',
+      });
+    }
+    if (Device.isDevice) {
+      const { status: existingStatus } =
+        await Notifications.getPermissionsAsync();
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Failed to get permissions');
+          return;
+        }
+      }
+      token = await Notifications.getExpoPushTokenAsync({
+        projectId: Constants?.expoConfig?.extra?.eas?.projectId,
+      });
+      console.log('token:', token);
+    }
+    return token;
+  }
   return (
     <>
       <StatusBar style='auto' />
