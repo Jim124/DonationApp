@@ -9,7 +9,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import * as Device from 'expo-device';
-import 'react-native-reanimated';
 
 import store from './redux/store';
 import { persistor } from './redux/store';
