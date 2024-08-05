@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "猫舍",
+    "name": "catHouse",
     "slug": "DonationApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,9 +26,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-font"
-    ],
+    "plugins": ["expo-font"],
     "extra": {
       "eas": {
         "projectId": "28d52d34-a60f-4fb1-8fca-40f0c20b97ff"
