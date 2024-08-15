@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "catHouse",
-    "slug": "DonationApp",
+    "slug": "catapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,11 +26,14 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-font"],
+    "plugins": [
+      "expo-font"
+    ],
     "extra": {
       "eas": {
-        "projectId": "28d52d34-a60f-4fb1-8fca-40f0c20b97ff"
+        "projectId": "9254f268-5e4d-4b5e-9d26-2a4165517b58"
       }
-    }
+    },
+    "owner": "hongfeidu"
   }
 }
