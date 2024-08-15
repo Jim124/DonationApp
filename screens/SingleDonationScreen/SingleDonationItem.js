@@ -24,11 +24,11 @@ const SingleDonationItem = ({ navigation, route }) => {
   );
   const categoryInformation = route.params.categoryInformation;
   let styleBack = {
-    mariginTop: verticalScale(0),
+    marginTop: verticalScale(0),
   };
   if (Platform.OS === 'android') {
     styleBack = {
-      mariginTop: verticalScale(25),
+      marginTop: verticalScale(25),
     };
   }
   return (

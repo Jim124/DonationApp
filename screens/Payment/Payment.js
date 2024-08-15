@@ -59,7 +59,7 @@ const Payment = ({ navigation }) => {
             <Header title='Making Donation' type={3} />
           </View>
           <Text style={style.price}>
-            You are abount to donate ${donationItem.price}
+            You are about to donate ${donationItem.price}
           </Text>
         </View>
         <View>
