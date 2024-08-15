@@ -26,7 +26,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-font"],
+    "plugins": [
+      "expo-font",
+      ["./with-app-theme", "Theme.MaterialComponents.DayNight.NoActionBar"]
+    ],
     "extra": {
       "eas": {
         "projectId": "9254f268-5e4d-4b5e-9d26-2a4165517b58"
